@@ -1,6 +1,9 @@
-# Solutions
+# [Full Stack Open](https://fullstackopen.com/en/)
 
-  <details>
+## Solutions
+
+<br>
+  <details open>
       <summary>Part 0</summary>
       <ul>
         <li><a href='./part-0/0.4-new_note.md'>0.4: New note</a></li>
@@ -9,18 +12,10 @@
       </ul>
   </details>
 
-  <details>
+  <details open>
     <summary>Part 1</summary>
     <ul>
-       <li>
-        <details>
-            <summary><a href='./part-1/course-information'>Course Information</a></summary>
-            <ul>
-            <li><a href='./part-1/course-information/1.1-Step-1'>1.1: Step-1</a></li>
-            <li><a href='./part-1/course-information/1.2-Step-2'>1.2: Step-2</a></li>
-            </ul>
-          </details>
-        </li>
+       <li><a href='./part-1/course-information'>Course Information</a></li>
     </ul>
 
   </details>
