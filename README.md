@@ -16,6 +16,8 @@
     <summary>Part 1</summary>
     <ul>
        <li><a href='./part-1/course-information'>Course Information</a></li>
+       <li><a href='./part-1/unicafe'>Unicafe</a></li>
+       <li><a href='./part-1/anecdotes'>Anecdotes</a></li>
     </ul>
 
   </details>
