@@ -1,0 +1,25 @@
+li {
+  padding-top: 3px;
+  font-size: 15px;
+}
+
+.notification {
+  width: 100%;
+  border-radius: 6px;
+  padding: 1em 1em;
+  background-color: lightgray;
+  margin: 0.5em 0;
+}
+.notification-text {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+}
+
+.success {
+  border: 3px solid green;
+  color: green;
+}
+.error {
+  border: 3px solid red;
+  color: red;
+}

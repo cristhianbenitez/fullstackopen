@@ -19,5 +19,13 @@
        <li><a href='./part-1/unicafe'>Unicafe</a></li>
        <li><a href='./part-1/anecdotes'>Anecdotes</a></li>
     </ul>
+  </details>
 
+  <details open>
+    <summary>Part 1</summary>
+    <ul>
+       <li><a href='./part-2/course-information'>Course Information</a></li>
+       <li><a href='./part-2/data-for-countries'>Data for countries</a></li>
+       <li><a href='./part-2/phonebook'>Phonebook</a></li>
+    </ul>
   </details>

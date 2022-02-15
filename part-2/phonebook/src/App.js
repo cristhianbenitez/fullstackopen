@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import Persons from './components/Persons';
 import PersonForm from './components/PersonForm';
 import phonebookService from './services/phonebookService';
+import Notification from './components/Notification';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState('');
   const [newPhone, setNewPhone] = useState('');
   const [filterInput, setFilterInput] = useState('');
+  const [notification, setNotification] = useState('');
+  const [hasError, setHasError] = useState(false);
 
   React.useEffect(() => {
     phonebookService.getAll().then((persons) => setPersons(persons));
@@ -25,8 +28,7 @@ const App = () => {
     event.preventDefault();
     const newPerson = {
       name: newName,
-      number: newPhone,
-      id: persons[persons.length - 1].id + 1
+      number: newPhone
     };
     const hasDuplicateName = persons.find((p) => newPerson.name === p.name);
 
@@ -38,7 +40,7 @@ const App = () => {
       ) {
         const id = hasDuplicateName.id;
         const updatedPerson = { ...hasDuplicateName, number: newPerson.number };
-        phonebookService
+        return phonebookService
           .updatePerson(id, updatedPerson)
           .then((updatedPerson) =>
             setPersons(
@@ -46,14 +48,35 @@ const App = () => {
                 person.id !== id ? person : updatedPerson
               )
             )
-          );
+          )
+          .catch((err) => {
+            setHasError(true);
+            setNotification(
+              `Information of  ${newPerson.name} has already been removed from server`
+            );
+            setTimeout(() => {
+              setNotification(null);
+            }, 5000);
+          });
+      } else {
         return;
       }
     }
 
-    phonebookService.createPerson(newPerson).then((newPerson) => {
-      setPersons(persons.concat(newPerson));
-    });
+    phonebookService
+      .createPerson(newPerson)
+      .then((newPerson) => {
+        setPersons(persons.concat(newPerson));
+        setNotification(`Added ${newPerson.name}`);
+        setHasError(false);
+        setTimeout(() => {
+          setNotification(null);
+        }, 5000);
+      })
+      .catch((error) => {
+        setHasError(true);
+        setNotification(error.response.data.error);
+      });
   };
 
   const handleDelete = (id) => {
@@ -76,6 +99,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification notification={notification} hasError={hasError} />
       <div>
         filter shown with <input type="text" onChange={handleFilter} />
       </div>
