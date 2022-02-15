@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Persons from './components/Persons';
 import PersonForm from './components/PersonForm';
-import axios from 'axios';
+import phonebookService from './services/phonebookService';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -10,9 +10,7 @@ const App = () => {
   const [filterInput, setFilterInput] = useState('');
 
   React.useEffect(() => {
-    axios.get('http://localhost:3001/persons').then((res) => {
-      setPersons(res.data);
-    });
+    phonebookService.getAll().then((persons) => setPersons(persons));
   }, []);
 
   const handleNewName = (event) => {
@@ -27,17 +25,44 @@ const App = () => {
     event.preventDefault();
     const newPerson = {
       name: newName,
-      phone: newPhone
+      number: newPhone,
+      id: persons[persons.length - 1].id + 1
     };
-    const hasDuplicates = persons.find((person) => newName === person.name);
+    const hasDuplicateName = persons.find((p) => newPerson.name === p.name);
 
-    hasDuplicates
-      ? alert(`${newName} is already added to phonebook`)
-      : setPersons(persons.concat(newPerson));
+    if (hasDuplicateName) {
+      if (
+        window.confirm(
+          `${newPerson.name} is already added to phonebook,replace the old number with a new one ?`
+        )
+      ) {
+        const id = hasDuplicateName.id;
+        const updatedPerson = { ...hasDuplicateName, number: newPerson.number };
+        phonebookService
+          .updatePerson(id, updatedPerson)
+          .then((updatedPerson) =>
+            setPersons(
+              persons.map((person) =>
+                person.id !== id ? person : updatedPerson
+              )
+            )
+          );
+        return;
+      }
+    }
 
-    // I think the way that it's done in the two lines below it's more readable
-    // if (hasDuplicates) return alert(`${newName} is already added to phonebook`);
-    // setPersons(persons.concat(newPerson));
+    phonebookService.createPerson(newPerson).then((newPerson) => {
+      setPersons(persons.concat(newPerson));
+    });
+  };
+
+  const handleDelete = (id) => {
+    const personToDelete = persons.find((person) => person.id === id);
+    if (window.confirm(`Delete ${personToDelete.name}`)) {
+      phonebookService
+        .deletePerson(id)
+        .then(setPersons(persons.filter((p) => p.id !== id)));
+    }
   };
 
   const handleFilter = (event) => {
@@ -47,6 +72,7 @@ const App = () => {
   const filteredPersons = persons.filter((person) =>
     person.name.toLowerCase().includes(filterInput.toLowerCase())
   );
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -62,7 +88,7 @@ const App = () => {
       />
       <h2>Numbers</h2>
       <ul>
-        <Persons persons={filteredPersons} />
+        <Persons persons={filteredPersons} handleDelete={handleDelete} />
       </ul>
     </div>
   );

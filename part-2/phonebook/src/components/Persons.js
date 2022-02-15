@@ -1,11 +1,13 @@
 import React from 'react';
 
-const Persons = ({ persons }) =>
-  persons.map(({ name, phone }) => (
+const Persons = ({ persons, handleDelete }) =>
+  persons.map(({ name, number, id }) => (
     <li key={name}>
       {name}
       &nbsp;
-      {phone}
+      {number}
+      &nbsp;
+      <button onClick={() => handleDelete(id)}>delete</button>
     </li>
   ));
 
