@@ -35,3 +35,9 @@
        <li><a href='./part-3/phonebook'>Phonebook</a></li>
     </ul>
   </details>
+  <details open>
+    <summary>Part 4 - Testing Express servers, user administration</summary>
+    <ul>
+       <li><a href='./part-4/blogslist'>Blogslist</a></li>
+    </ul>
+  </details>
