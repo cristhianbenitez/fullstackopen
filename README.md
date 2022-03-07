@@ -41,3 +41,9 @@
        <li><a href='./part-4/blogslist'>Blogslist</a></li>
     </ul>
   </details>
+  <details open>
+    <summary>Part 5 - Testing React apps</summary>
+    <ul>
+       <li><a href='./part-5/blogslist'>Blogslist</a></li>
+    </ul>
+  </details>
