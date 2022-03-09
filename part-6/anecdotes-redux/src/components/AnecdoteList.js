@@ -13,15 +13,14 @@ const AnecdoteList = () => {
     dispatch(handleNotification(notification));
   };
 
-  const sortedAnecdotes = anecdotes.concat().sort((a, b) => b.votes - a.votes);
-
-  const filteredAnecdotes = sortedAnecdotes.filter((a) =>
-    a.content.toLowerCase().includes(filterInput.toLowerCase())
-  );
+  const regex = new RegExp(`^${filterInput}`, 'i');
+  const sortedAndFilteredAnecdotes = [...anecdotes]
+    .sort((a, b) => b.votes - a.votes)
+    .filter((a) => regex.test(a.content));
 
   return (
     <>
-      {filteredAnecdotes.map(({ id, content, votes }) => (
+      {sortedAndFilteredAnecdotes.map(({ id, content, votes }) => (
         <div key={id}>
           <div>{content}</div>
           <div>

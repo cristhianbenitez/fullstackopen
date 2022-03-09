@@ -145,3 +145,13 @@ const Filter = () => {
 
 export default Filter
 ```
+
+## 6.13 Anecdotes and the backend, step1
+
+When the application launches, fetch the anecdotes from the backend implemented using json-server.
+
+As the initial backend data, you can use, e.g. this.
+
+## 6.14 Anecdotes and the backend, step2
+
+Modify the creation of new anecdotes, such that the anecdotes are stored in the backend.
