@@ -4,19 +4,12 @@ import AnecdoteList from './components/AnecdoteList';
 import AnecdoteForm from './components/AnecdoteForm';
 import Notification from './components/Notification';
 import Filter from './components/Filter';
-import anecdotes from './services/anecdotes';
-import { useDispatch } from 'react-redux';
-import { setAnecdotes } from './reducers/anecdotesReducer';
+import { connect } from 'react-redux';
+import { initializeAnecdotes } from './reducers/anecdotesReducer';
 
-const App = () => {
-  const dispatch = useDispatch();
-
+const App = (props) => {
   useEffect(() => {
-    const getAllAnecdotes = async () => {
-      const allAnecdotes = await anecdotes.getAll();
-      dispatch(setAnecdotes(allAnecdotes));
-    };
-    getAllAnecdotes();
+    props.initializeAnecdotes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -31,4 +24,5 @@ const App = () => {
   );
 };
 
-export default App;
+const connectedApp = connect(null, { initializeAnecdotes })(App);
+export default connectedApp;

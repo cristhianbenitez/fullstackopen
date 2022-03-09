@@ -47,3 +47,10 @@
        <li><a href='./part-5/blogslist'>Blogslist</a></li>
     </ul>
   </details>
+  <details open>
+    <summary>Part 6 - State management with Redux</summary>
+    <ul>
+       <li><a href='./part-6/anecdotes-redux'>Anecdotes Redux</a></li>
+       <li><a href='./part-6/unicafe-redux'>Unicafe Redux</a></li>
+    </ul>
+  </details>
