@@ -54,3 +54,12 @@
        <li><a href='./part-6/unicafe-redux'>Unicafe Redux</a></li>
     </ul>
   </details>
+  <details open>
+    <summary>Part 7 - React router, custom hooks, styling app with CSS and webpack</summary>
+    <ul>
+       <li><a href='./part-7/blogslist'>Bloglist</a></li>
+       <li><a href='./part-7/country-hook'>Country-Hooks</a></li>
+       <li><a href='./part-7/routed-anecdote'>Routed-Anecdotes</a></li>
+       <li><a href='./part-7/ultimate-hooks'>Ultimate-Hooks</a></li>
+    </ul>
+  </details>
